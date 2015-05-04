@@ -4,3 +4,6 @@
 [submodule ".deps/github.com~pinf-to~pinf-to-pio~0/source/installed/master"]
 	path = .deps/github.com~pinf-to~pinf-to-pio~0/source/installed/master
 	url = git@github.com:pinf-to/pinf-to-pio.git
+[submodule ".deps/github.com~pinf-to~pinf-to-mozilla-firefox-profile~0/source/installed/master"]
+	path = .deps/github.com~pinf-to~pinf-to-mozilla-firefox-profile~0/source/installed/master
+	url = git@github.com:pinf-to/pinf-to-mozilla-firefox-profile.git
