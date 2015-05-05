@@ -15,11 +15,6 @@ function init {
 
 		BO_callPlugin "bash.origin.pinf@0.1.1" ensure genesis $@
 
-		. "$__BO_DIR__/../boot" activate
-
-		# TODO: Refactor to dynamically call install on each sub-program.
-		BO_sourcePrototype "server/install"
-
 	popd > /dev/null
 }
 init $@

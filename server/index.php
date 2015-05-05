@@ -1,6 +1,6 @@
 <?php
 
-echo "Hello from FirePHP server!";
+echo "Hello from PHP server!";
 
 
 phpinfo();
