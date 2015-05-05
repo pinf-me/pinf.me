@@ -22,7 +22,7 @@
 			"name": "firephp-server",
 			"template": "phpfpm-apache",
 			"sourcePath": "{{__DIRNAME__}}",
-			"bindSourcePath": true,
+			"bindSourcePath": false,
 			"docker": {
 				"DOCKER_TLS_VERIFY": "{{!env.DOCKER_TLS_VERIFY}}",
 				"DOCKER_HOST": "{{!env.DOCKER_HOST}}",
