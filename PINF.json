@@ -31,13 +31,19 @@
                 "cartridge": "nodejs-0.10"
             }
         },
-        "github.com~pinf-to~pinf-to-dnsimple~0": {
-            "$to": "dns",
-            "github.com/pinf-logic/pinf.logic-for-dns/0": {
-                "credentials": {
+        "github.com~pinf-io~io.pinf.pio.profile~0": {
+            "$to": "profile",
+            "credentials": {
+                "dnsimple.com": {
                     "email": "{{env.DNSIMPLE_EMAIL}}",
                     "token": "{{env.DNSIMPLE_TOKEN}}"
-                },
+                }
+            }
+        },
+        "github.com~pinf-to~pinf-to-dnsimple~0": {
+            "$to": "dns",
+            "credentials": "{{$from.profile.credentials['dnsimple.com']}}",
+            "github.com/pinf-logic/pinf.logic-for-dns/0": {
                 "records": {
                     "pinf.me": {
                         "domain": "pinf.me",
