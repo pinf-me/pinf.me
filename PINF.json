@@ -25,7 +25,7 @@
         },
         "github.com/pinf-to/pinf-to-openshift/0": {
             "$to": "live",
-            "sourcePath": "{{$from.pgs.programs.server.getRuntimeConfigFor(server).sourcePath}}",
+            "sourcePath": "{{$from.pgs.programs.client.getRuntimeConfigFor(server).targetPath}}",
             "openshift": {
                 "app": "pinfme",
                 "cartridge": "nodejs-0.10"
