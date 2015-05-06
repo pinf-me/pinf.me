@@ -5,8 +5,11 @@
     "config": {
         "pinf.me/0": {
             "$to": "pinf.me",
-            "run": {
+            "dev": {
                 "homepage": "{{$from.browser.homepage}}"
+            },
+            "live": {
+                "homepage": "{{$from.live.app.url}}"
             }
         },
         "genesis.pinf.org/0": {
@@ -19,6 +22,14 @@
             "browserVersion": "40.0a1",
             "browserRelease": "nightly",
             "homepage": "http://localhost:{{$from.pgs.programs.client.getRuntimeConfigFor(server).port}}"
+        },
+        "github.com/pinf-to/pinf-to-openshift/0": {
+            "$to": "live",
+            "sourcePath": "{{$from.pgs.programs.server.getRuntimeConfigFor(server).sourcePath}}",
+            "openshift": {
+                "app": "pinfwiki",
+                "cartridge": "nodejs-0.10"
+            }
         }
     },
     "mappings": {
@@ -59,6 +70,14 @@
             "location": "{{__DIRNAME__}}/.deps/github.com~pinf-to~pinf-to-mozilla-firefox-profile~0/source/installed/master",
             "install": true
         },
-        "bash.origin.php": "{{__DIRNAME__}}/.deps/github.com~bash-origin~bash.origin.php~0/source/installed/master"
+        "bash.origin.php": "{{__DIRNAME__}}/.deps/github.com~bash-origin~bash.origin.php~0/source/installed/master",
+        "pinf-to-openshift": {
+            "depends": [
+                "bash.origin",
+                "to.pinf.lib"
+            ],
+            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-to~pinf-to-openshift~0/source/installed/master",
+            "install": true
+        }
     }
 }
