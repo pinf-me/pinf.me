@@ -27,7 +27,7 @@
             "$to": "live",
             "sourcePath": "{{$from.pgs.programs.server.getRuntimeConfigFor(server).sourcePath}}",
             "openshift": {
-                "app": "pinfwiki",
+                "app": "pinfme",
                 "cartridge": "nodejs-0.10"
             }
         }
