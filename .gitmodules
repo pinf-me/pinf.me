@@ -13,3 +13,6 @@
 [submodule ".deps/github.com~pinf-to~pinf-to-browser~0/source/installed/master"]
 	path = .deps/github.com~pinf-to~pinf-to-browser~0/source/installed/master
 	url = git@github.com:pinf-to/pinf-to-browser.git
+[submodule ".deps/github.com~pinf-it~pinf-it-bundler~0/source/installed/master"]
+	path = .deps/github.com~pinf-it~pinf-it-bundler~0/source/installed/master
+	url = git@github.com:pinf-it/pinf-it-bundler.git

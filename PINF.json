@@ -22,6 +22,10 @@
         }
     },
     "mappings": {
+        "pinf-it-bundler": {
+            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-it~pinf-it-bundler~0/source/installed/master",
+            "install": true
+        },
         "pinf-to-pio": {
             "depends": [
                 "bash.origin",
