@@ -22,3 +22,6 @@
 [submodule ".deps/github.com~pinf-to~pinf-to-dnsimple~0/source/installed/master"]
 	path = .deps/github.com~pinf-to~pinf-to-dnsimple~0/source/installed/master
 	url = git@github.com:pinf-to/pinf-to-dnsimple.git
+[submodule ".deps/github.com~pinf-logic~pinf.logic-for-dns~0/source/installed/master"]
+	path = .deps/github.com~pinf-logic~pinf.logic-for-dns~0/source/installed/master
+	url = git@github.com:pinf-logic/pinf.logic-for-dns.git
