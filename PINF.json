@@ -112,6 +112,14 @@
         "pinf.logic-for-dns": {
             "location": "{{__DIRNAME__}}/.deps/github.com~pinf-logic~pinf.logic-for-dns~0/source/installed/master",
             "install": true
+        },
+        "io.pinf.pio.profile": {
+            "depends": [
+                "bash.origin",
+                "to.pinf.lib"
+            ],
+            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-io~io.pinf.pio.profile~0/source/installed/master",
+            "install": true
         }
     }
 }
