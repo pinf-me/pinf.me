@@ -30,6 +30,27 @@
                 "app": "pinfme",
                 "cartridge": "nodejs-0.10"
             }
+        },
+        "github.com~pinf-to~pinf-to-dnsimple~0": {
+            "$to": "dns",
+            "github.com/pinf-logic/pinf.logic-for-dns/0": {
+                "credentials": {
+                    "email": "{{env.DNSIMPLE_EMAIL}}",
+                    "token": "{{env.DNSIMPLE_TOKEN}}"
+                },
+                "records": {
+                    "pinf.me": {
+                        "domain": "pinf.me",
+                        "type": "A",
+                        "data": "{{$from.live.app.ip}}"
+                    },
+                    "*.pinf.me": {
+                        "domain": "pinf.me",
+                        "type": "CNAME",
+                        "data": "pinf.me"
+                    }
+                }
+            }
         }
     },
     "mappings": {
@@ -77,6 +98,19 @@
                 "to.pinf.lib"
             ],
             "location": "{{__DIRNAME__}}/.deps/github.com~pinf-to~pinf-to-openshift~0/source/installed/master",
+            "install": true
+        },
+        "pinf-to-dnsimple": {
+            "depends": [
+                "bash.origin",
+                "to.pinf.lib",
+                "pinf.logic-for-dns"
+            ],
+            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-to~pinf-to-dnsimple~0/source/installed/master",
+            "install": true
+        },
+        "pinf.logic-for-dns": {
+            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-logic~pinf.logic-for-dns~0/source/installed/master",
             "install": true
         }
     }
