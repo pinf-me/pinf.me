@@ -31,7 +31,10 @@
             "sourcePath": "{{$from.pgs.programs.client.getRuntimeConfigFor(server).targetPath}}",
             "openshift": {
                 "app": "pinfme",
-                "cartridge": "nodejs-0.10"
+                "cartridge": "nodejs-0.10",
+                "aliases": {
+                    "pinf.me": true
+                }
             }
         },
         "github.com~pinf-io~io.pinf.pio.profile~0": {
@@ -57,6 +60,24 @@
                         "domain": "pinf.me",
                         "type": "CNAME",
                         "data": "pinf.me"
+                    },
+                    "email:10": {
+                        "domain": "pinf.me",
+                        "type": "MX",
+                        "data": "grkd-1.inbound10.luxsci.com",
+                        "prio": 10
+                    },
+                    "email:20": {
+                        "domain": "pinf.me",
+                        "type": "MX",
+                        "data": "grkd-1.inbound20.luxsci.com",
+                        "prio": 20
+                    },
+                    "email:30": {
+                        "domain": "pinf.me",
+                        "type": "MX",
+                        "data": "grkd-1.inbound30.luxsci.com",
+                        "prio": 30
                     }
                 }
             }
