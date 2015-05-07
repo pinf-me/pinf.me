@@ -5,6 +5,9 @@
     "config": {
         "pinf.me/0": {
             "$to": "pinf.me",
+            "$depends": [
+                "dns"
+            ],
             "dev": {
                 "homepage": "{{$from.browser.homepage}}"
             },
