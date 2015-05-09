@@ -1,4 +1,7 @@
 {
+    "1@extends": [
+        "github.com/pinf-tools/ScriptedCloud/0.1.0/PINF.proto.json"
+    ],
     "boot": {
         "config": "pinf.me/0"
     },
@@ -6,7 +9,8 @@
         "pinf.me/0": {
             "$to": "pinf.me",
             "$depends": [
-                "dns"
+                "dns",
+                "upload"
             ],
             "dev": {
                 "homepage": "{{$from.browser.homepage}}"
@@ -26,23 +30,65 @@
             "browserRelease": "nightly",
             "homepage": "http://localhost:{{$from.pgs.programs.client.getRuntimeConfigFor(server).port}}"
         },
-        "github.com/pinf-to/pinf-to-openshift/0": {
-            "$to": "live",
-            "sourcePath": "{{$from.pgs.programs.client.getRuntimeConfigFor(server).targetPath}}",
-            "openshift": {
-                "app": "pinfme",
-                "cartridge": "nodejs-0.10",
-                "aliases": {
-                    "pinf.me": true
+        "github.com~pinf-io~io.pinf.pio.profile~0": {
+            "$to": "profile",
+            "keyId": "{{env.PIO_PROFILE_KEY}}",
+            "keyName": "pinf.me-{{env.PGS_WORKSPACE_UID}}",
+            "keyPath": "{{env.HOME}}/.ssh/pinf.me-{{env.PGS_WORKSPACE_UID}}.me_rsa",
+            "stores": {
+                "aws": {
+                    "s3": {
+                        "region": "us-west-1",
+                        "publicHost": "s3-us-west-1.amazonaws.com",
+                        "path": "pinf.me-{{env.PGS_WORKSPACE_UID}}"
+                    }
+                }
+            },
+            "files": {
+                "profile.json": {
+                    "path": "{{env.PIO_PROFILE_PATH}}"
+                },
+                "activate.sh": {
+                    "path": "{{activatePathFromProfilePath({{env.PIO_PROFILE_PATH}})}}"
+                },
+                "ssh.key": {
+                    "path": "{{env.HOME}}/.ssh/pinf.me-{{env.PGS_WORKSPACE_UID}}.me_rsa"
                 }
             }
         },
-        "github.com~pinf-io~io.pinf.pio.profile~0": {
-            "$to": "profile",
-            "credentials": {
-                "dnsimple.com": {
-                    "email": "{{env.DNSIMPLE_EMAIL}}",
-                    "token": "{{env.DNSIMPLE_TOKEN}}"
+        "github.com~pinf-to~pinf-to-digitalocean~0": {
+            "$to": "live",
+            "credentials": "{{$from.profile.credentials['digitalocean.com']}}",
+            "dropplet": {
+                "name": "pinf.me",
+                "keyId": "pinf.me",
+                "keyPath": "{{$from.profile.keyPath}}",
+                "keyPubPath": "{{$from.profile.keyPubPath}}"
+            }
+        },
+        "github.com~devcomp-io~io.devcomp.vm~0": {
+            "$to": "vm",
+            "ssh": {
+                "host": "{{$from.live.vm.ip}}",
+                "keyPath": "{{$from.profile.keyPath}}"
+            }
+        },
+        "github.com~pinf-to~pinf-to-ssh~0": {
+            "$to": "upload",
+            "upload": {
+                "nodejs-client-server": {
+                    "sourcePath": "{{$from.pgs.programs.client.getRuntimeConfigFor(server).targetPath}}",
+                    "target": {
+                        "host": "{{$from.live.vm.ip}}",
+                        "path": "{{$from.vm.remoteDeployPath}}/client"
+                    }
+                },
+                "php-server": {
+                    "sourcePath": "{{__DIRNAME__}}/server",
+                    "target": {
+                        "host": "{{$from.live.vm.ip}}",
+                        "path": "{{$from.vm.remoteDeployPath}}/server"
+                    }
                 }
             }
         },
@@ -54,7 +100,7 @@
                     "pinf.me": {
                         "domain": "pinf.me",
                         "type": "A",
-                        "data": "{{$from.live.app.ip}}"
+                        "data": "{{$from.live.vm.ip}}"
                     },
                     "*.pinf.me": {
                         "domain": "pinf.me",
@@ -150,6 +196,34 @@
             ],
             "location": "{{__DIRNAME__}}/.deps/github.com~pinf-io~io.pinf.pio.profile~0/source/installed/master",
             "install": true
+        },
+        "pinf-to-digitalocean": {
+            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-to~pinf-to-digitalocean~0/source/installed/master",
+            "install": true
+        },
+        "smi-for-npm": {
+            "depends": [
+                "bash.origin"
+            ],
+            "location": "{{__DIRNAME__}}/.deps/github.com~sourcemint~smi-for-npm~0/source/installed/master",
+            "install": true
+        },
+        "ScriptedCloud": {
+            "depends": [
+                "bash.origin"
+            ],
+            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-tools~ScriptedCloud~0/source/installed/master",
+            "install": true
+        },
+        "io.devcomp.vm": {
+            "depends": [
+                "bash.origin"
+            ],
+            "location": "{{__DIRNAME__}}/.deps/github.com~devcomp-io~io.devcomp.vm~0/source/installed/master",
+            "install": true
         }
-    }
+    },
+    "@overlays": [
+        "{{env.PIO_PROFILE_PATH}}"
+    ]
 }
